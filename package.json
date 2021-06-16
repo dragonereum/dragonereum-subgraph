@@ -5,18 +5,18 @@
   "license": "WTFPL",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/maksim-tolo/dragonereum-subgraph.git"
+    "url": "git+https://github.com/dragonereum/dragonereum-subgraph.git"
   },
   "bugs": {
-    "url": "https://github.com/maksim-tolo/dragonereum-subgraph/issues"
+    "url": "https://github.com/dragonereum/dragonereum-subgraph/issues"
   },
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ maksim-tolo/dragonereum",
-    "create-local": "graph create --node http://localhost:8020/ maksim-tolo/dragonereum",
-    "remove-local": "graph remove --node http://localhost:8020/ maksim-tolo/dragonereum",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 maksim-tolo/dragonereum"
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ dragonereum/dragonereum-matic",
+    "create-local": "graph create --node http://localhost:8020/ dragonereum/dragonereum-matic",
+    "remove-local": "graph remove --node http://localhost:8020/ dragonereum/dragonereum-matic",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 dragonereum/dragonereum-matic"
   },
   "husky": {
     "hooks": {

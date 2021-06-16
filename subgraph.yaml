@@ -1,16 +1,16 @@
 specVersion: 0.0.2
 description: Subgraph for Dragonereum blockchain game
-repository: https://github.com/maksim-tolo/dragonereum-subgraph
+repository: https://github.com/dragonereum/dragonereum-subgraph
 schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
     name: EggStorage
-    network: mainnet
+    network: matic
     source:
-      address: "0xfCAd2859F3e602D4cFB9ACA35465A618f9009F7b"
+      address: "0x7418A04cFbA74211303b780C9882e29718b7B9c8"
       abi: EggStorage
-      startBlock: 6790000
+      startBlock: 15794864
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -27,11 +27,11 @@ dataSources:
       file: ./src/index.ts
   - kind: ethereum/contract
     name: DragonStorage
-    network: mainnet
+    network: matic
     source:
-      address: "0x960f401AED58668ef476eF02B2A2D43B83C261D8"
+      address: "0x531a4eA9451E61aa5d929A8D127f5f706575e1Cf"
       abi: DragonStorage
-      startBlock: 6790000
+      startBlock: 15794864
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -48,11 +48,11 @@ dataSources:
       file: ./src/index.ts
   - kind: ethereum/contract
     name: Events
-    network: mainnet
+    network: matic
     source:
-      address: "0xD31b8e0219Bd83678978f6dB531d9A3F45608894"
+      address: "0x7F40bCD640A9Fc1D7Fe801B071Eba67d11764797"
       abi: Events
-      startBlock: 6790000
+      startBlock: 15794864
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -83,8 +83,8 @@ dataSources:
       blockHandlers:
         - handler: handleBlock
       eventHandlers:
-        - event: EggClaimed(indexed address,indexed uint256)
-          handler: handleEggClaimed
+        - event: GenesisEggBought(indexed address,indexed uint256,uint256)
+          handler: handleGenesisEggBought
         - event: EggSentToNest(indexed address,indexed uint256)
           handler: handleEggSentToNest
         - event: EggHatched(indexed address,indexed uint256,indexed uint256)

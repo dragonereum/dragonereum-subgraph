@@ -1,5 +1,5 @@
 export {
-  handleEggClaimed,
+  handleGenesisEggBought,
   handleEggSentToNest,
   handleEggHatched,
   handleDragonUpgraded,

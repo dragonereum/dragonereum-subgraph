@@ -4,7 +4,7 @@
 import { Address, BigInt } from '@graphprotocol/graph-ts';
 
 import {
-  EggClaimed as EggClaimedEvent,
+  GenesisEggBought as GenesisEggBoughtEvent,
   EggSentToNest as EggSentToNestEvent,
   EggHatched as EggHatchedEvent,
   DragonUpgraded as DragonUpgradedEvent,
@@ -87,7 +87,7 @@ function createEgg(id: BigInt, owner: Address, timestamp: BigInt): void {
 }
 
 // TODO: updateEtherSpentOnToken<Egg>(egg, event.transaction);
-export function handleEggClaimed(event: EggClaimedEvent): void {
+export function handleGenesisEggBought(event: GenesisEggBoughtEvent): void {
   createEgg(event.params.id, event.params.user, event.block.timestamp);
 
   let eggDistributionInfoId = '0';
@@ -107,9 +107,7 @@ export function handleEggClaimed(event: EggClaimedEvent): void {
   let eggId = event.params.id.toString();
   let distributedEgg = new DistributedEgg(eggId);
 
-  distributedEgg.price = event.transaction.gasPrice.times(
-    event.transaction.gasUsed,
-  );
+  distributedEgg.price = event.params.price;
   distributedEgg.blockNumber = event.block.number;
   distributedEgg.owner = event.params.user.toHex();
   distributedEgg.index = eggDistributionInfo.distributedAmount;
@@ -301,6 +299,7 @@ export function handleDragonTransfer(event: DragonTransferEvent): void {
   }
 }
 
+// TODO: remove from sale
 export function handleEggTransfer(event: EggTransferEvent): void {
   let to = event.params._to.toHex();
   let id = event.params._tokenId.toString();
