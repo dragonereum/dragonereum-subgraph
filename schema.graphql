@@ -227,6 +227,27 @@ type GladiatorBattle @entity {
   applicantsDragons: [Dragon!]
 }
 
+interface EventData @entity {
+  id: ID!
+}
+
+type TokenEventData implements EventData @entity {
+  id: ID!
+  tokenId: String!
+}
+
+type GoldMarketEventData implements EventData @entity {
+  id: ID!
+  price: BigInt!
+  amount: BigInt!
+}
+
+type Event @entity {
+  id: ID!
+  type: EventType!
+  data: EventData
+}
+
 enum GladiatorBattleStatus {
   created
   applicantsAdded
@@ -264,4 +285,27 @@ enum Currency {
 enum GoldOrderType {
   sell
   buy
+}
+
+enum EventType {
+  EggClaimed
+  EggSentToNest
+  EggCreated
+  EggHatched
+  DragonOnSale
+  DragonRemovedFromSale
+  DragonBought
+  DragonOnBreeding
+  DragonRemovedFromBreeding
+  DragonBreedingBought
+  EggOnSale
+  EggRemovedFromSale
+  EggBought
+  GoldSellOrderCreated
+  GoldSellOrderCancelled
+  GoldBought
+  SkillOnSale
+  SkillRemovedFromSale
+  SkillBought
+  BattleEnded
 }

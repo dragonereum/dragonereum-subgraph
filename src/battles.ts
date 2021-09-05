@@ -35,6 +35,39 @@ import {
   updateSpecialBattleSkills,
 } from './helper';
 
+// function _isTouchable(uint256 _id) internal view returns (bool) {
+//   uint32 _regenerationTime = core.getDragonFullRegenerationTime(_id);
+//   return lastBattleDate[_id].add(_regenerationTime.mul(4)) < now; // solium-disable-line security/no-block-members
+// }
+//
+// function _sqrt(uint32 x) internal pure returns (uint32 y) {
+//   uint32 z = x.add(1).div(2);
+//   y = x;
+//   while (z < y) {
+//     y = z;
+//     z = x.div(z).add(z).div(2);
+//   }
+// }
+//
+// function _calculateRegenerationSpeed(uint32 _max) internal pure returns (uint32) {
+//   // because HP/mana is multiplied by 100 so we need to have step multiplied by 100 too
+//   return _sqrt(_max.mul(100)).div(2).div(1 minutes); // hp/mana in second
+// }
+//
+// function calculateFullRegenerationTime(uint32 _max) external pure returns (uint32) { // in seconds
+//   return _max.div(_calculateRegenerationSpeed(_max));
+// }
+
+function calculateFullRegenerationTime(maxHealth: BigInt) {
+  const speed = Math.sqrt(maxHealth.toI32()) / (2 * 60); // hp is second
+  return (maxHealth / speed) * 1000; // in milliseconds
+}
+
+function getNextPossibleBattleDate(health, lastBattleTimestamp) {
+  const regenerationTime = calculateFullRegenerationTime(health);
+  return new Date(lastBattleTimestamp + regenerationTime * 4);
+}
+
 // TODO: Should be called on the previous block
 function takeDragonSnapshot(dragonId: BigInt, snapshotId: string): void {
   let getter = Getter.bind(Address.fromString(getterAddress));
